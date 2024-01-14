@@ -74,20 +74,18 @@ button {
 
 .flag-container {
     margin: 0px;
-}
-
-.flag {
-    font-size: 2rem;
+    font-size: 3rem;
 }
 
 .arms-area {
     grid-column-start: 2;
     padding: 10px;
     margin: 5px;
+    
 }
 
 .arms {
-    width: 100%;
+    width: 90%;
 }
 
 .image-area {
@@ -96,7 +94,7 @@ button {
     grid-column-end: 3;
     grid-column-start: 1;
     margin: 5px;
-    width: 100%;
+    width: 97%;
 }
 
 .country-image {
@@ -104,4 +102,25 @@ button {
     height: auto;
 }
 
-@media screen and (min-width: 7)
+@media screen and (min-width: 769px) {
+
+    header {
+        height: 200px;
+    }
+
+    .country-area {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .image-area {
+        
+        grid-row-start: 1;
+        grid-column-end: 4;
+        grid-column-start: 3;
+    }
+
+    .facts-area {
+        margin-left: 30%;
+    }
+
+}

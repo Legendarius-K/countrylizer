@@ -3,8 +3,6 @@ $(() => {
 const countryURL = "https://restcountries.com/v3.1/name/";
 const imageURL = "https://api.unsplash.com/search/photos?page=1&query="
 const image_KEY = "&client_id=ozWfLK5sNU3wz4H1jJj3wwsWIg7iuPzEXAFS1mgcgsc"
-// const googleMapsAPI = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAfEs05mxsOuXcL3uiOrw4ltsnvYP2yiXs&callback=initMap";
-// const apiKey = "&key=AIzaSyAfEs05mxsOuXcL3uiOrw4ltsnvYP2yiXs";
 const countryArea = $(".country-area");
 
 const getCountry = async url => {
@@ -20,6 +18,7 @@ const getCountry = async url => {
         renderFacts(data);
         renderArms(data);
         console.log(data);
+        
     } catch(error) {
         countryArea.append("Oopsie-doodle-doo! An error occured!")
     }    
@@ -61,7 +60,7 @@ const renderFacts = data => {
             <p>Population: ${data[0].population} </p>
             <p class="borders">Borders: </p>
             <p>Continent: ${data[0].continents} </p>
-            <p class="flag-container">Flag: <span class="flag">${data[0].flag}</span> </p>
+            <p class="flag-container">${data[0].flag}</p>
         </div>
         `
     )
