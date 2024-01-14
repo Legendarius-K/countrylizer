@@ -4,6 +4,7 @@ const countryURL = "https://restcountries.com/v3.1/name/";
 const imageURL = "https://api.unsplash.com/search/photos?page=1&query="
 const image_KEY = "&client_id=ozWfLK5sNU3wz4H1jJj3wwsWIg7iuPzEXAFS1mgcgsc"
 const countryArea = $(".country-area");
+const errorArea = $(".error-area")
 
 const getCountry = async url => {
     
@@ -18,9 +19,9 @@ const getCountry = async url => {
         renderFacts(data);
         renderArms(data);
         console.log(data);
-        
+
     } catch(error) {
-        countryArea.append("Oopsie-doodle-doo! An error occured!")
+        errorArea.append("Oopsie-doodle-doo! An error occured!")
     }    
 }
 
@@ -37,7 +38,7 @@ const getImage = async url => {
         console.log(data2);
         
     } catch(error) {
-        countryArea.append("Oh nooez! An error occured fetching the image. You'll have to imagine what the country looks like.")
+        errorArea.append("Oh nooez! An error occured fetching the image. You'll have to imagine what the country looks like.")
     }
 }
 
@@ -72,7 +73,7 @@ const renderFacts = data => {
 
 const renderArms = data => {
     
-    if (data[0].coatOfArms) {
+    if (data[0].coatOfArms.png) {
         countryArea.append(
             `
             <div class="arms-area">
@@ -80,12 +81,11 @@ const renderArms = data => {
             </div>
             `
         )
-    } else {
-        countryArea.append(
+    } else if (data[0].coatOfArms.png === "") {
+        
+        errorArea.empty().append(
             `
-            <div class="arms-area">
-                <p>Sorry, this country doesn't seem to have a coat of arms</p>    
-            </div>
+            <p>Sorry, this country doesn't seem to have a coat of arms</p>    
             `
         )
     }
@@ -101,7 +101,7 @@ $("button").on("click", () => {
     if (userCountry === "italy" || userCountry === "Italy") {
         countryArea.append(
             `
-            <p>BOUNGIORNO DAVIDE BALDI! 🤌 </p>
+            <p>BUONGIORNO DAVIDE BALDI! 🤌 </p>
             `
         )
     }
@@ -109,7 +109,7 @@ $("button").on("click", () => {
     if (userCountry === "australia" || userCountry === "Australia")  {
         countryArea.append(
             `
-            <p>I knew it Rob! You cheeky aussie!</p>
+            <p>Hah! I knew it Rob! You cheeky aussie!</p>
             `
         )
     }
