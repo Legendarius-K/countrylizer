@@ -18,7 +18,7 @@ const getCountry = async url => {
         let data = await response.json();
         renderFacts(data);
         renderArms(data);
-        console.log(data);
+        console.log("data" + data);
 
     } catch(error) {
         errorArea.append("Oopsie-doodle-doo! An error occured!")
@@ -44,7 +44,7 @@ const getImage = async url => {
 
 const renderImage = data2 => {
     countryArea.append(
-        `
+        `   
         <div class="image-area">
             <image class="country-image" src="${data2.results[0].urls.regular}"
         </div>
@@ -54,14 +54,13 @@ const renderImage = data2 => {
 
 const renderFacts = data => {
 
-    let objectKeys = Object.keys(data[0].languages);
+    let objectKeys = Object.values(data[0].languages);
 
     countryArea.append(
         `
         <div class="facts-area">
             <p>Capital: ${data[0].capital}</p>
             <p>Population: ${data[0].population} </p>
-            <p class="borders">Borders: </p>
             <p class="languages">Languages: </p>
             <p>Continent: ${data[0].continents} </p>
             <p class="flag-container">${data[0].flag}</p>
@@ -73,13 +72,17 @@ const renderFacts = data => {
         $(".languages").append(`${language}, `)
     })
        
-    data[0].borders.map(country => {
-        $(".borders").append(`${country}, `)
-    })
+    if (data[0].borders) {
+        $(".facts-area").append(`<p class="borders">Borders: </p>`)
+
+        data[0].borders.map(country => {
+            $(".borders").append(`${country}, `)
+        })
+    }
 }
 
 const renderArms = data => {
-    
+    console.log(data);
     if (data[0].coatOfArms.png) {
         countryArea.append(
             `
@@ -108,6 +111,7 @@ const renderArms = data => {
 
 
 $("button").on("click", () => {
+    errorArea.empty();
     countryArea.empty();
     let userCountry = $("input").val();
     getCountry(countryURL + userCountry);
@@ -121,13 +125,6 @@ $("button").on("click", () => {
         )
     }
 
-    if (userCountry === "australia" || userCountry === "Australia")  {
-        countryArea.append(
-            `
-            <p>Hah! I knew it Rob! You cheeky aussie!</p>
-            `
-        )
-    }
 })
 
 });
