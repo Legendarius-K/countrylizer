@@ -54,17 +54,24 @@ const renderImage = data2 => {
 
 const renderFacts = data => {
 
+    let objectKeys = Object.keys(data[0].languages);
+
     countryArea.append(
         `
         <div class="facts-area">
             <p>Capital: ${data[0].capital}</p>
             <p>Population: ${data[0].population} </p>
             <p class="borders">Borders: </p>
+            <p class="languages">Languages: </p>
             <p>Continent: ${data[0].continents} </p>
             <p class="flag-container">${data[0].flag}</p>
         </div>
         `
     )
+
+    $(objectKeys).each((index, language) => {
+        $(".languages").append(`${language}, `)
+    })
        
     data[0].borders.map(country => {
         $(".borders").append(`${country}, `)
@@ -81,14 +88,22 @@ const renderArms = data => {
             </div>
             `
         )
-    } else if (data[0].coatOfArms.png === "") {
+    } else if (data[0].coatOfArms.svg) {
+        countryArea.append(
+            `
+            <div class="arms-area">
+                <img class="arms" src="${data[0].coatOfArms.svg}"    
+            </div>
+            `
+        )
+    } else {
         
         errorArea.empty().append(
             `
             <p>Sorry, this country doesn't seem to have a coat of arms</p>    
             `
         )
-    }
+    }    
 }
 
 
