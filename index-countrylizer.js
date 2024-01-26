@@ -63,7 +63,6 @@ const renderFacts = data => {
             <p>Population: ${data[0].population} </p>
             <p class="languages">Languages: </p>
             <p>Continent: ${data[0].continents} </p>
-            <p class="flag-container">${data[0].flag}</p>
         </div>
         `
     )
@@ -79,6 +78,8 @@ const renderFacts = data => {
             $(".borders").append(`${country}, `)
         })
     }
+
+    $(".facts-area").append(`<p class="flag-container">${data[0].flag}</p>`)
 }
 
 const renderArms = data => {
